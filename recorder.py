@@ -42,8 +42,9 @@ while True:
  else: tick += 1
  if tick>max_wait:
   print('ooh')
-  g.stop()
-  g = None
+  if g is not None:
+   g.stop()
+   g = None
   tick=0
 
 
