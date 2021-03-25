@@ -81,8 +81,10 @@ class EchoChamber(threading.Thread):
                     status, data1, data2, data3 = e[0]
                     #print("event {} {} {}".format(status,data1,data2))
                     if status==144:
+                        # in the list of required echoes
                         for ec in self.echos:
                             noteoffset,volfactor,delay=ec
+                            # Echo(note value, new velocity, delay in seconds, output device, true for on).start()
                             Echo(data1+noteoffset,int(volfactor*data2),delay,self.out_dev,data2>0).start()
                     # self.out_dev.write_short(status, data1, data2)
 

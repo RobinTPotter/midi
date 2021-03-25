@@ -27,3 +27,11 @@ r.stop()
 .. is a cheap trick. run it and it will use the midi module above to poll the input device. if it hears something it starts a new thread "Go" which starts a subprocess for arecordmidi (in device 20 - you should change that if it isn't yours). if it hears nothing for a bit it will terminate arecordmidi leaving you with a midi file of your recording. until it hears something else.. the problem being the first message is always missed from the recording. also I don't think arecordmidi is included in windows..:
 
 ```python3 -m recorder```
+
+# enter the flask chamber
+
+.. a work in progress - set the echo chamber settings from a web ui
+
+```
+python3 -m flaskchamber
+```
