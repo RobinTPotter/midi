@@ -4,7 +4,7 @@ import midi
 import time
 import subprocess
 
-max_wait = 10
+max_wait = 8
 midi_client = 20
 
 midi.in_device.read(999)
@@ -33,13 +33,16 @@ while True:
  time.sleep(1)
  if midi.in_device.poll():
   midi.in_device.read(999)
-  print("hello")
+  tick=0
   if g is None:
+   print("hello")
    g=Go()
    g.daemon=True
    g.start()
 
- else: tick += 1
+ else:
+  tick += 1
+  if g is not None: print(tick/max_wait)
  if tick>max_wait:
   print('ooh')
   if g is not None:
