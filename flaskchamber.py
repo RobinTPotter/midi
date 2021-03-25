@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO
+from flask_bootstrap import Bootstrap
+
 
 import midi
 
@@ -10,6 +12,7 @@ class FlaskGoGo():
         self.r=midi.EchoChamber(midi.in_device, midi.out_device)
         self.r.start()
         self.app = Flask(__name__)
+        Bootstrap(self.app)
         self.app.config['SECRET_KEY'] = 'secret!'
         self.app.add_url_rule('/', 'index', self.index)
         self.socketio = SocketIO(self.app)
@@ -30,22 +33,8 @@ class FlaskGoGo():
     def index(self):
         """the page
         """
-        data = ['{}'.format(e) for e in self.r.echos]
-        return """<html onselectstart='return false;'>
-<script src=\"/static/socketio.js\" crossorigin=\"anonymous\"></script>
-<script type="text/javascript" charset="utf-8">
-var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
-socket.on('connect', function() {{
-    socket.emit('hello', {{data: 'I\\'m connected!'}});
-}});
-</script>
-<body>
-{}
-<script>
-socket.emit('update', {{data: "dickheads!" }})
-</script>
-</body>
-</html>""".format(data)
+
+        return render_template('index.html', data=self.r.echos) 
 
     def update(self,data):
         print("updating {}".format(data))
