@@ -38,7 +38,7 @@ def exit_handler():
 atexit.register(exit_handler)
 
 def announce():
-    for n in range(20,35,3):
+    for n in range(40,55,3):
         out_device.note_on(n,40)
         time.sleep(0.02)
         out_device.note_off(n)

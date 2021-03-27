@@ -1,0 +1,37 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}This is an example page{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-fixed-top">
+  <!-- ... -->
+</div>
+{% endblock %}
+
+{% block content %}
+  <h1>Hello, Bootstrap</h1>
+<form id="theform" onsubmit="myFunction()">
+{% for echo in data %}
+  <div class="form-group">
+    <label for="id_vol_{{ loop.index0 }}">Example Range input</label>
+    <input type="range" class="form-control-range" id="id_vol_{{ loop.index0 }}" min="0" max="1" step="0.05">
+  </div>
+{% endfor %}
+<input type="submit"></input>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{url_for('static', filename='socketio.js')}}" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf-8">
+var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+socket.on('connect', function() {
+    socket.emit('hello', {data: 'I\'m connected!'});
+});
+</script>
+{{super()}}
+<script>
+function myFunction() {
+    socket.emit('update', {data: "dickheads!", "test": $('theform').formSerialize() })
+}
+</script>
+{% endblock %}
