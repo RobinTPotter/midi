@@ -39,6 +39,8 @@ class FlaskGoGo():
     def update(self,data):
         print("updating {}".format(data))
 
+
+
 if __name__=='__main__':
     f=FlaskGoGo()
     f.run()

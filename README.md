@@ -33,5 +33,5 @@ r.stop()
 .. a work in progress - set the echo chamber settings from a web ui
 
 ```
-python3 -m flaskchamber
+gunicorn3 flaskchamber:app --bind=0.0.0.0
 ```
