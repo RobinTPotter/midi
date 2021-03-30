@@ -17,6 +17,8 @@ class FlaskGoGo():
         self.app.add_url_rule('/', 'index', self.index)
         self.socketio = SocketIO(self.app)
         self.socketio.on_event('update', self.update)
+        self.socketio.on_event('add', self.add)
+        self.socketio.on_event('delete', self.delete)
         #self.socketio.on_event('noteon', self.noteon)
         #self.socketio.on_event('noteoff', self.noteoff)
         #self.socketio.on_event('oct_up', self.oct_up)
@@ -35,6 +37,15 @@ class FlaskGoGo():
         """
 
         return render_template('index.html', data=self.r.echos) 
+
+    def delete(self,data):
+        id = int(data['data'].split('_')[-1])
+        print("data is {}, id found is{}".format(data,id))
+        del self.r.echos[id]
+        print("deleting {}".format(data))
+
+    def add(self,data):
+        print("adding {}".format(data))
 
     def update(self,data):
         print("updating {}".format(data))
