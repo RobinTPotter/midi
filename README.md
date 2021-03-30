@@ -28,6 +28,19 @@ r.stop()
 
 ```python3 -m recorder```
 
+# beep.py
+
+adds a couple of functions:
+
+```
+beep.Beep(60,40,0.5) #play 60 with 40 for 0.5 seconds
+beep.Beep([60,65],40,0.5) #play 60 and 65 with 40 for 0.5 seconds
+beep.tada() #play a major tada 
+beep.tada(True, offset=12) #play a minor tada an octave higher
+```
+
+
+
 # enter the flask chamber
 
 .. a work in progress - set the echo chamber settings from a web ui
