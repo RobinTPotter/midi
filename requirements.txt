@@ -1,0 +1,5 @@
+flask
+Flask-Bootstrap
+pygame==1.9.3
+flask_socketio==4.3.2
+flask_wtf
