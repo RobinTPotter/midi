@@ -5,20 +5,8 @@ from flask_wtf import FlaskForm
 from wtforms.fields.html5 import DecimalRangeField
 from wtforms import HiddenField
 from werkzeug.urls import url_encode
-
+import logging
 import midi
-
-
-##class EchoForm(Form):
-#    velocity_factor=DecimalRangeField('Vel. F.') #, default=1) #, min=0.0, max=2, step=0.05)
-#    delay=DecimalRangeField('Delay) #', default=0) #, min=0.0, max=2, step=0.05)
-#    note_offset=DecimalRangeField('Offset')  #, default=0) #, min=-24, max=24, step=1)
-#    remove=SubmitField('x')
-
-
-class Test(FlaskForm):
-    hidden=HiddenField()
-    velocity_factor=DecimalRangeField('Vel. F.')
 
 
 class FlaskGoGo():
@@ -28,6 +16,12 @@ class FlaskGoGo():
         self.r=midi.EchoChamber(midi.in_device, midi.out_device)
         self.r.start()
         self.app = Flask(__name__)
+        if __name__ != '__main__':
+            gunicorn_logger = logging.getLogger('gunicorn.error')
+            self.app.logger.handlers = gunicorn_logger.handlers
+            self.app.logger.setLevel(gunicorn_logger.level)
+
+
         Bootstrap(self.app)
         self.app.config['SECRET_KEY'] = 'secret!'
         self.app.add_url_rule('/', 'index', self.index)
@@ -58,18 +52,17 @@ class FlaskGoGo():
         #    form.velocity_factor=e[1]
         #    form.delay=e[2]
         #    forms.append(form)
-        form=Test()
-        return render_template('index.html', data=self.r.echos, form=form) 
+        return render_template('index.html', data=self.r.echos) 
 
     def delete(self,data):
         id = int(data['data'].split('_')[-1])
-        print("data is {}, id found is{}".format(data,id))
+        self.app.logger.info("data is {}, id found is{}".format(data,id))
         del self.r.echos[id]
-        print("deleting {}".format(data))
+        self.app.logger.info("deleting {}".format(data))
 
     def add(self,data):
         self.r.echos.append([0,1,0])
-        print("adding {}".format(data))
+        self.app.logger.info("adding {}".format(data))
 
     def update(self,data):
         type = (data['data'].split('_')[1])
@@ -81,7 +74,7 @@ class FlaskGoGo():
         if type=='velfact': cell=1
         if type=='delay': cell=2
         self.r.echos[id][cell]=value
-        print("updating {} {} {} {}".format(data, type, id, value))
+        self.app.logger.info("updating {} {} {} {}".format(data, type, id, value))
 
 
 

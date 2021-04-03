@@ -1,7 +1,7 @@
 {% extends "bootstrap/base.html" %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
-{% block title %}This is an example page{% endblock %}
+{% block title %}Echo{% endblock %}
 
 {% block navbar %}
 {% endblock %}
@@ -10,19 +10,19 @@
 <form>
 {% for echo in data %}
     <fieldset>
-        <label style="float:left" for="id_offset_{{ loop.index0 }}">Offset: </label>
-        <b style="float:left" id="val_offset_{{ loop.index0 }}">{{ echo[0] }}</b>
-        <input style="float:left;max-width:90%;padding-left:5px" type="range" onchange="slide(event)" id="id_offset_{{ loop.index0 }}" min="-24" max="24" step="1"  value="{{ echo[0] }}">
+        <label style="float:left;width:15%" for="id_offset_{{ loop.index0 }}">Offset: </label>
+        <input style="float:left;width:70%;padding-left:5px" type="range" onchange="slide(event)" id="id_offset_{{ loop.index0 }}" min="-24" max="24" step="1"  value="{{ echo[0] }}">
+        <b style="text-align:center;float:left;width:15%" id="val_offset_{{ loop.index0 }}">{{ echo[0] }}</b>
     </fieldset>
     <fieldset>
-        <label style="float:left" for="id_velfact_{{ loop.index0 }}">Vel.F: </label>
-        <b style="float:left" id="val_velfact_{{ loop.index0 }}">{{ echo[1] }}</b>
-        <input style="float:left;max-width:90%;padding-left:5px" type="range" onchange="slide(event)" id="id_velfact_{{ loop.index0 }}" min="0" max="2" step="0.05"  value="{{ echo[1] }}">
+        <label style="float:left;width:15%" for="id_velfact_{{ loop.index0 }}">Vel.F: </label>
+        <input style="float:left;width:70%;padding-left:5px" type="range" onchange="slide(event)" id="id_velfact_{{ loop.index0 }}" min="0" max="2" step="0.05"  value="{{ echo[1] }}">
+        <b style="text-align:center;float:left;width:15%" id="val_velfact_{{ loop.index0 }}">{{ echo[1] }}</b>
     </fieldset>
     <fieldset>
-        <label style="float:left" for="id_delay_{{ loop.index0 }}">Delay.: </label>
-        <b style="float:left" id="val_delay_{{ loop.index0 }}">{{ echo[2] }}</b>
-        <input style="float:left;max-width:90%;padding-left:5px" type="range" onchange="slide(event)" id="id_delay_{{ loop.index0 }}" min="0" max="2" step="0.05"  value="{{ echo[2] }}">
+        <label style="float:left;width:15%" for="id_delay_{{ loop.index0 }}">Delay.: </label>
+        <input style="float:left;width:70%;padding-left:5px" type="range" onchange="slide(event)" id="id_delay_{{ loop.index0 }}" min="0" max="2" step="0.05"  value="{{ echo[2] }}">
+        <b style="text-align:center;float:left;width:15%" id="val_delay_{{ loop.index0 }}">{{ echo[2] }}</b>
     </fieldset>
     <input type="button" class="btn btn-sm btn-danger" onclick="del(event)" id="id_delete_{{ loop.index0 }}" value="x">
 {% endfor %}
