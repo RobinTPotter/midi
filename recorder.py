@@ -86,7 +86,7 @@ if __name__=='__main__':
   else:
    tick += 1
    if g is not None:
-    print(tick/max_wait)
+    #print(tick/max_wait)
     if tick>max_wait and not play_called:
      print('ooh')
      g.stop()
