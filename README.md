@@ -69,5 +69,7 @@ beep.tada(True, offset=12) #play a minor tada an octave higher
 
 ```
 python3 -m flaskchamber
-gunicorn3 flaskchamber:app --bind=0.0.0.0
+# gunicorn3 flaskchamber:app --bind=0.0.0.0 # can't get this to work properly
 ```
+
+requirements / venv is used for this
