@@ -3,11 +3,12 @@ import threading
 import midi
 import time
 import subprocess
+from config import *
 
-max_wait = 8
-midi_client = 20
+#max_wait = 8
+#midi_client = 20
 
-midi.in_device.read(999)
+midi.in_device.read(midi_buffer)
 
 g = None
 
@@ -46,7 +47,7 @@ if __name__=='__main__':
   time.sleep(1)
   stop_called=False
   if midi.in_device.poll():
-   e=midi.in_device.read(999)
+   e=midi.in_device.read(midi_buffer)
    e=[ev[0][1] for ev in e if ev[0][0]==144 and ev[0][2]>0]
    e=sorted(e)
    print(e)
