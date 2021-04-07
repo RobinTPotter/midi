@@ -34,5 +34,5 @@ class Beep(threading.Thread):
 def tada(minor=False,offset=0):
     m=0
     if minor==True: m=1
-    Beep([30+offset,34-m+offset,37+offset],30,.05)
-    Beep([30+offset,34-m+offset,37+offset],30,.2,0.1)
+    Beep([60+offset,64-m+offset,67+offset],30,.05)
+    Beep([60+offset,64-m+offset,67+offset],30,.2,0.1)
